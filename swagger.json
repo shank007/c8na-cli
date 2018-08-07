@@ -1,0 +1,436 @@
+{
+    "info": {
+        "version": "V1.0",
+        "description": "## Authentication\n\nAuthenticate requests by including an Authorization header.  For example:\n\n```bash\ncurl 'http://35.154.156.45:3000/api/users/myEntityId' -H \"Authorization: Bearer <auth token>\"\n```\n\n## Generate Token\nTo retrieve an auth token, POST a username/password combination to /api/auth/users.  For example:\n\n```bash\ncurl -X POST 'http://35.154.156.45:3000/api/auth/users' -d \"username=USERNAME&password=PASSWORD\"\n```\n\n",
+        "title": "Lend Ledger V0.1 API Docs"
+    },
+    "paths": {
+        "/account/getAccount": {
+            "get": {
+                "security": [
+                    {
+                        "oauth2": [
+                            "rw:account"
+                        ]
+                    }
+                ],
+                "summary": "Get account details.",
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "parameters": [
+                    {  
+                        "name":"accountId",
+                        "in":"query",
+                        "description":"Provide account id.",
+                        "required":true,
+                        "type":"string"
+                     }
+                ],
+                "tags": [
+                    "Account"
+                ]
+            }
+        },
+        "/account/create": {
+            "post": {
+                "security": [
+                    {
+                        "oauth2": [
+                            "rw:account"
+                        ]
+                    }
+                ],
+                "summary": "Create a new Account",
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/Account"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Account"
+                        },
+                        "required": true,
+                        "description":"Here you can create the new account. You have to specify your name, account name and role.",
+                        "name": "body",
+                        "in": "body"
+                    }
+                ],
+                "tags": [
+                    "Account"
+                ]
+            }
+        },
+        "/account/auditAccount": {
+            "get": {
+                "security": [
+                    {
+                        "oauth2": [
+                            "rw:account"
+                        ]
+                    }
+                ],
+                "summary": "Get account details.",
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/Account"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "parameters": [
+                    {  
+                        "name":"accountId",
+                        "in":"query",
+                        "description":"Here you can check your audit of the account. For seeking audit, you have to specify your accountId.",
+                        "required":true,
+                        "type":"string"
+                     }
+                ],
+                "tags": [
+                    "Account"
+                ]
+            }
+        },
+        "/payment/lend": {
+            "post": {
+                "security": [
+                    {
+                        "oauth2": [
+                            "rw:Lend"
+                        ]
+                    }
+                ],
+                "summary": "Here you can lend money.",
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/Lend"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Lend"
+                        },
+                        "required": true,
+                        "description":"Here you can lend the asset. For lending you have to specify receiver's id.",
+                        "name": "body",
+                        "in": "body"
+                    }
+                ],
+                "tags": [
+                    "Payment"
+                ]
+            }
+        },
+        "/payment/exchange": {
+            "post": {
+                "security": [
+                    {
+                        "oauth2": [
+                            "rw:Exchange"
+                        ]
+                    }
+                ],
+                "summary": "Exchange",
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/Exchange"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Exchange"
+                        },
+                        "required": true,
+                        "description":"Here you can exchange the fiat into the asset. For that, you have to mention your acount id, seed,asset type and amount.",
+                        "name": "body",
+                        "in": "body"
+                    }
+                ],
+                "tags": [
+                    "Payment"
+                ]
+            }
+        },
+        "/asset/changeTrust": {
+            "post": {
+                "security": [
+                    {
+                        "oauth2": [
+                            "rw:Asset"
+                        ]
+                    }
+                ],
+                "summary": "change the trust",
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/Change Trust"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Change Trust"
+                        },
+                        "required": true,
+                        "name": "body",
+                        "description":"Here you can create the trust-line. For that, you have to specify your account details.",
+                        "in": "body"
+                    }
+                ],
+                "tags": [
+                    "Asset"
+                ]
+            }
+        },
+        "/asset/issueAsset": {
+            "post": {
+                "security": [
+                    {
+                        "oauth2": [
+                            "rw:Asset"
+                        ]
+                    }
+                ],
+                "summary": "issue asset",
+                "responses": {
+                    "201": {
+                        "description": "Successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/Issue Asset"
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema": {
+                            "$ref": "#/definitions/Issue Asset"
+                        },
+                        "required": true,
+                        "name": "body",
+                        "description":"Here you can issue the asset to the user. For that, you have to specify the reciever's details.",
+                        "in": "body"
+                    }
+                ],
+                "tags": [
+                    "Asset"
+                ]
+            }
+        }
+    },
+    "parameters": {},
+    "tags": [],
+    "securityDefinitions": {
+        "oauth2": {
+            "flow": "authorizationCode",
+            "tokenUrl": "/o/token/",
+            "type": "oauth2",
+            "authorizationUrl": "/docs/oauth2/authorize",
+            "scopes": {
+                "r:Account": "List assertions in a User's Backpack",
+                "r:profile": "See who you are",
+                "rw:backpack": "Upload badges into a User's Backpack",
+                "rw:badgeuserAdmin": "rw:badgeuserAdmin",
+                "rw:issuer": "Create and update Issuers, create and update Badgeclasses, and award Assertions",
+                "rw:profile": "Update your own User profile"
+            }
+        }
+    },
+    "definitions": {
+        "Account": {
+            "required": [],
+            "properties": {
+                "userName": {
+                    "type": "string",
+                    "description": "username",
+                    "format": "string"
+                },
+                "accountName": {
+                    "type": "string",
+                    "description": "account",
+                    "format": "string"
+                },
+                "accountRole": {
+                    "type": "string",
+                    "description": "account role should be 'Borrower', 'Lender', 'Credit Node' ",
+                    "format": "string"
+                }
+            }
+        },
+        "Lend": {
+            "required": [],
+            "properties": {
+                "lenderId": {
+                    "type": "string",
+                    "description": "Please enter your account id",
+                    "format": "string"
+                },
+                "borrowerId": {
+                    "type": "string",
+                    "description": "Please enter destination account id.",
+                    "format": "string"
+                },
+                "amount": {
+                    "type": "string",
+                    "description": "Please enter amount.",
+                    "format": "string"
+                },
+                "remarks": {
+                    "type": "string",
+                    "description": "You can specify remarks.",
+                    "format": "string"
+                },
+                "assetName": {
+                    "type": "string",
+                    "description": "Choose asset name.",
+                    "format": "string"
+                },
+                "lenderSeed": {
+                    "type": "string",
+                    "description": "Please enter your seed.",
+                    "format": "string"
+                }
+            }
+        },
+        "Exchange": {
+            "required": [],
+            "properties": {
+                "borrowerId": {
+                    "type": "string",
+                    "description": "borrower id",
+                    "format": "Please enter your account id."
+                },
+                "amount": {
+                    "type": "string",
+                    "description": "amount",
+                    "format": "Please enter amount"
+                },
+                "remarks": {
+                    "type": "string",
+                    "description": "remarks",
+                    "format": "You can specify remarks."
+                },
+                "assetName": {
+                    "type": "string",
+                    "description": "Please enter asset name.",
+                    "format": "string"
+                },
+                "borrowerSeed": {
+                    "type": "string",
+                    "description": "Please enter your seed.",
+                    "format": "string"
+                }
+            }
+        },
+        "Change Trust":{
+            "required": [],
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "description": "Enter your first name.",
+                    "format": "string"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "Enter your last name",
+                    "format": "string"
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "Enter your account id",
+                    "format": "string"
+                },
+                "accountNo": {
+                    "type": "string",
+                    "description": "Enter your account number",
+                    "format": "string"
+                },
+                "accountIfsc": {
+                    "type": "string",
+                    "description": "Enter your account IFSC",
+                    "format": "string"
+                },
+                "assetName": {
+                    "type": "string",
+                    "description": "Enter the asset name",
+                    "format": "string"
+                },               
+                "secret": {
+                    "type": "string",
+                    "description": "Please enter your seed.",
+                    "format": "string"
+                }
+
+            }
+        },
+        "Issue Asset": {
+            "required": [],
+            "properties": {
+                "assetName": {
+                    "type": "string",
+                    "description": "borrower id",
+                    "format": "Enter the asset name."
+                },
+                "receiverAccount": {
+                    "type": "string",
+                    "description": "Please enter the amount.",
+                    "format": "string"
+                },
+                "issueAsset": {
+                    "type": "string",
+                    "description": "Choose the asset type.",
+                    "format": "string"
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "oauth2": []
+        }
+    ],
+    "swagger": "2.0"
+}
