@@ -1,36 +1,30 @@
 {
-  "name": "LendLedger",
+  "name": "c8na-cli",
   "version": "1.0.0",
-  "description": "http://lendledger.io/",
-  "main": "server.js",
-  "scripts": {
-    "start":"node lendledger.js",
-    "test": "mocha --timeout 100000"
+  "description": "A CLI app to execute all stellar transaction",
+  "license": "MIT",
+  "homepage": "https://github.com/shank007/c8na-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shank007/c8na-cli.git"
   },
-  "author": "Girijashankar Mishra",
-  "license": "ISC",
+  "engines": {
+    "node": ">=8"
+  },
+  "keywords": [
+    "create",
+    "balance",
+    "audit"
+  ],
+  "preferGlobal": true,
+  "bin": {
+    "outside": "bin/outside"
+  },
+  "scripts": {},
+  "devDependencies": {},
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "chai": "^4.1.2",
-    "chai-http": "^4.0.0",
-    "cookie-parse": "^0.4.0",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.4",
-    "ejs": "^2.6.1",
-    "express": "^4.16.2",
-    "express-jwt": "^5.3.1",
-    "express-session": "^1.15.6",
-    "helmet": "^3.13.0",
-    "jsonwebtoken": "^8.3.0",
-    "mocha": "^5.2.0",
-    "mongodb": "^2.0",
-    "mongoskin": "^2.0.3",
-    "mysql": "^2.16.0",
-    "pg-promise": "^8.4.5",
-    "q": "^1.5.1",
-    "request": "^2.83.0",
-    "stellar-sdk": "^0.8.0",
-    "stripe": "^6.7.0",
-    "swagger-ui-express": "^3.0.10"
+    "axios": "^0.18.0",
+    "minimist": "^1.2.0",
+    "ora": "^2.0.0"
   }
 }
